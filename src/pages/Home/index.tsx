@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  FlatList,
   Platform,
   View,
   Text,
@@ -46,11 +47,15 @@ export const Home = () => {
 
         <Text style={styles.titleTask}>Minhas Tarefas </Text>
 
-        {tasks.map((task, index) => (
-          <TouchableOpacity key={index} style={styles.buttonTask}>
-            <Text style={styles.titleTask}>{task.title}</Text>
-          </TouchableOpacity>
-        ))}
+        <FlatList
+          data={tasks}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <TouchableOpacity activeOpacity={0.7} style={styles.buttonTask}>
+              <Text style={styles.subtitleTask}>{item.title}</Text>
+            </TouchableOpacity>
+          )}
+        />
       </View>
     </SafeAreaView>
   );
@@ -66,18 +71,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#121214',
     paddingHorizontal: 30,
-    paddingVertical: 50,
+    paddingVertical: 80,
   },
   title: {
     color: '#f1f1f1',
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
   },
   titleTask: {
     color: '#f1f1f1',
     fontSize: 24,
     fontWeight: 'bold',
-    marginVertical: 50,
+    marginVertical: 30,
   },
   input: {
     backgroundColor: '#29292e',
@@ -100,14 +105,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonTask: {
-    backgroundColor: '#29292e',
+    backgroundColor: '#a67e32',
     padding: 10,
     marginTop: 10,
     borderRadius: 50,
     alignItems: 'center',
   },
-  titleTask: {
-    color: '#f1f1f1',
+  subtitleTask: {
+    color: '#29292e',
     fontSize: 20,
     fontWeight: 'bold',
   },
