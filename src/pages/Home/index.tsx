@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  FlatList,
   Platform,
   View,
   Text,
@@ -10,6 +9,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Constants from 'expo-constants';
+import { TaskList } from '../../components/TaskList';
 
 interface Task {
   id: string;
@@ -47,15 +47,8 @@ export const Home = () => {
 
         <Text style={styles.titleTask}>Minhas Tarefas </Text>
 
-        <FlatList
-          data={tasks}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => (
-            <TouchableOpacity activeOpacity={0.7} style={styles.buttonTask}>
-              <Text style={styles.subtitleTask}>{item.title}</Text>
-            </TouchableOpacity>
-          )}
-        />
+        <TaskList tasks={tasks} />
+
       </View>
     </SafeAreaView>
   );
@@ -102,18 +95,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#121214',
     fontSize: 18,
-    fontWeight: 'bold',
-  },
-  buttonTask: {
-    backgroundColor: '#a67e32',
-    padding: 10,
-    marginTop: 10,
-    borderRadius: 50,
-    alignItems: 'center',
-  },
-  subtitleTask: {
-    color: '#29292e',
-    fontSize: 20,
     fontWeight: 'bold',
   },
 });
